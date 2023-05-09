@@ -30,14 +30,20 @@ function callHook() {
 
     $bootstrapController = 'Bootstrap\\New' . ucwords($controller) . 'Controller';
 
+    if (!class_exists($bootstrapController)) {
+        echo '404';
+        die;
+    }
+
     $dispatch = (new $bootstrapController())->create();
 
 
     if (method_exists($dispatch, $action)) {
-        echo call_user_func_array(array($dispatch, $action), array());
+        call_user_func_array(array($dispatch, $action), array());
     } else {
         //404
         echo '404';
+        die;
     }
 
 }
