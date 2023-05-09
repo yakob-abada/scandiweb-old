@@ -1,7 +1,10 @@
 {
     "autoload": {
         "psr-0": {
+            "Bootstrap": "src",
             "Controller": "src",
+            "Entity": "src",
+            "Repository": "src",
             "Model": "src",
             "Service": "src"
         }

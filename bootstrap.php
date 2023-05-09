@@ -4,7 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 
 function callHook() {
-    $url = $_GET['url'] ?? '';
+    $url = $_SERVER['REQUEST_URI'] ?? '';
 
     //Matching url param from route list
     $routes = registerRouters();
@@ -12,7 +12,8 @@ function callHook() {
     $actionMatch = '';
     foreach ($routes as $route) {
         $routeUrl = $route['url'];
-        if (preg_match("/^$routeUrl$/", $url, $match)) {
+        $pattern = preg_quote($routeUrl, '/');
+        if (preg_match("/^$pattern$/", $url, $match)) {
             $controllerMatch = $route['controller'];
             $actionMatch = $route['action'];
             if (isset($match[1])) {
@@ -27,9 +28,9 @@ function callHook() {
     $action     = $actionMatch;
     $action    .= 'Action';
 
-    $controller = 'Controller\\' . ucwords($controller) . 'Controller';
+    $bootstrapController = 'Bootstrap\\New' . ucwords($controller) . 'Controller';
 
-    $dispatch = new $controller();
+    $dispatch = (new $bootstrapController())->create();
 
 
     if (method_exists($dispatch, $action)) {
@@ -43,10 +44,12 @@ function callHook() {
 
 function registerConstants() {
     require_once('config/default.php');
+    require_once('config/database.php');
 }
 
 function setGetParams($match, $params) {
     $parmNo = 1;
+
     foreach ($params as $param) {
         if (isset($match[$parmNo])) {
             $_GET[$param] = $match[$parmNo];

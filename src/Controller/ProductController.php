@@ -2,13 +2,16 @@
 
 namespace Controller;
 
+use Repository\ProductRepository;
 use Service\JsonResponse;
 
 class ProductController {
 
-    public function indexAction() {
-        $data = array("a" => "Apple", "b" => "Ball", "c" => "Cat");
+    public function __construct(private ProductRepository $repository) 
+    {}
 
-        return JsonResponse::generate($data);
+    public function getAction() 
+    {
+        return JsonResponse::generate($this->repository->findbySku('SKU100'));
     }
 }

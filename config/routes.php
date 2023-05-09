@@ -2,9 +2,9 @@
 
 return array(
         array(
-            'url' => '',
+            'url' => '/product/get',
             'controller' => 'Product',
-            'action' => 'index',
+            'action' => 'get',
             'params' => array(),
         ),
     );
