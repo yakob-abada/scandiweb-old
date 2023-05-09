@@ -1,0 +1,9 @@
+{
+    "autoload": {
+        "psr-0": {
+            "Controller": "src",
+            "Model": "src",
+            "Service": "src"
+        }
+    }
+}
