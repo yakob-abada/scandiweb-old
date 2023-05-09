@@ -37,15 +37,12 @@ function callHook() {
 
     $dispatch = (new $bootstrapController())->create();
 
-
-    if (method_exists($dispatch, $action)) {
-        call_user_func_array(array($dispatch, $action), array());
-    } else {
-        //404
+    if (!method_exists($dispatch, $action)) {
         echo '404';
         die;
     }
 
+    call_user_func_array(array($dispatch, $action), array());
 }
 
 function registerConstants() {
