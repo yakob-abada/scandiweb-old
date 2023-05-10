@@ -4,24 +4,27 @@ namespace Entity;
 
 class Product 
 {
+	const PRODUCT_TYPE_BOOK = 'book';
+	const PRODUCT_TYPE_DVD = 'dvd';
+	const PRODUCT_TYPE_FURNITURE = 'furniture';
 
-    protected string $sku;
+    protected string | null $sku = null;
 
-    protected string $name;
+    protected string | null $name = null;
 
-    protected int $price;
+    protected int | null $price = null;
 
-    protected string $productType;
+    protected string | null $productType = null; 
 
-    protected int $size;
+    protected int | null $size = null;
 
-    protected int $weight;
+    protected int | null $weight = null;
 
-    protected int $heigth;
+    protected int | null $heigth = null;
 
-    protected int $length;
+    protected int | null $length = null;
 
-    protected int $width;
+    protected int | null $width = null;
 
     public function setSku(string $sku): Product
     {
@@ -29,7 +32,7 @@ class Product
         return $this;
     }
 
-    public function getSku(): string
+    public function getSku(): string | null
     {
         return $this->sku;
     }
@@ -40,21 +43,24 @@ class Product
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): string | null
     {
         return $this->name;
     }
 
-	public function getPrice(): int {
+	public function getPrice(): int | null
+	{
 		return $this->price;
 	}
 
-	public function setPrice(int $price): self {
+	public function setPrice(int $price): self 
+	{
 		$this->price = $price;
 		return $this;
 	}
 
-	public function getProductType(): string {
+	public function getProductType(): string | null
+	{
 		return $this->productType;
 	}
 
@@ -64,7 +70,7 @@ class Product
 		return $this;
 	}
 
-	public function getSize(): int 
+	public function getSize(): int | null 
     {
 		return $this->size;
 	}
@@ -75,7 +81,7 @@ class Product
 		return $this;
 	}
 
-	public function getWeight(): int 
+	public function getWeight(): int | null 
     {
 		return $this->weight;
 	}
@@ -86,7 +92,7 @@ class Product
 		return $this;
 	}
 
-	public function getHeigth(): int 
+	public function getHeigth(): int | null 
     {
 		return $this->heigth;
 	}
@@ -97,13 +103,25 @@ class Product
 		return $this;
 	}
 	
-	public function getLength(): int {
+	public function getLength(): int | null 
+	{
 		return $this->length;
 	}
 
 	public function setLength(int $length): Product 
     {
 		$this->length = $length;
+		return $this;
+	}
+
+	public function getWidth(): int | null 
+	{
+		return $this->width;
+	}
+
+	public function setWidth(int $width): Product 
+    {
+		$this->width = $width;
 		return $this;
 	}
 }
