@@ -1,11 +1,15 @@
 <?php
 
-return array(
-        array(
-            'url' => '/product/get',
-            'controller' => 'Product',
-            'action' => 'get',
-            'params' => array(),
-        ),
-    );
+return [
+    [
+        'url' => '/product/get',
+        'controller' => 'Product',
+        'action' => 'get',
+    ],
+    [
+        'url' => '/product/saveApi',
+        'controller' => 'Product',
+        'action' => 'save',
+    ]
+];
 

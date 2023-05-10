@@ -22,4 +22,9 @@ class ProductController {
 
         return JsonResponse::generate($result);
     }
+
+    public function saveAction()
+    {
+        echo 405;
+    }
 }
