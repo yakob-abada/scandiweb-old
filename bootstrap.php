@@ -12,7 +12,8 @@ function callHook() {
     $actionMatch = '';
     foreach ($routes as $route) {
         $routeUrl = $route['url'];
-        $pattern = preg_quote($routeUrl, '/');
+        $pattern = preg_quote($routeUrl, '/') . '\??[a-zA-Z_=0-9&@$%#]*'; // /product/get?sku=productSku1
+
         if (preg_match("/^$pattern$/", $url, $match)) {
             $controllerMatch = $route['controller'];
             $actionMatch = $route['action'];

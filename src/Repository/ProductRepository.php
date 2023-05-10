@@ -37,7 +37,7 @@ class ProductRepository extends AbstractRepository
           $this->mysqli->close();
     }
 
-    public function findbySku(string $sku): array
+    public function findbySku(string $sku): ?array
     {
         $query = sprintf(
             "SELECT * FROM %s WHERE sku = '%s'",

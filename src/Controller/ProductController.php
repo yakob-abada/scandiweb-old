@@ -12,6 +12,14 @@ class ProductController {
 
     public function getAction() 
     {
-        return JsonResponse::generate($this->repository->findbySku('SKU100'));
+        $sku = $_REQUEST['sku'] ?? '';
+        $result = $this->repository->findbySku($sku);
+
+        if (null === $result) {
+            echo '404';
+            die;
+        }
+
+        return JsonResponse::generate($result);
     }
 }
