@@ -1,4 +1,5 @@
 <?php
+use Bootstrap\NewControllerInterface;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -27,14 +28,21 @@ function callHook() {
     $action     = $actionMatch;
     $action    .= 'Action';
 
-    $bootstrapController = 'Bootstrap\\New' . ucwords($controller) . 'Controller';
+    $bootstrapControllerName = 'Bootstrap\\New' . ucwords($controller) . 'Controller';
 
-    if (!class_exists($bootstrapController)) {
+    if (!class_exists($bootstrapControllerName)) {
         echo '404';
         die;
     }
 
-    $dispatch = (new $bootstrapController())->create();
+    $bootstrapController = new $bootstrapControllerName();
+
+    if (!$bootstrapController instanceof NewControllerInterface) {
+        echo '404';
+        die;
+    }
+
+    $dispatch = $bootstrapController->create();
 
     if (!method_exists($dispatch, $action)) {
         echo '404';

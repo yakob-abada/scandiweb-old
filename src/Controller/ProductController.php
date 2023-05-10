@@ -5,7 +5,8 @@ namespace Controller;
 use Repository\ProductRepository;
 use Service\JsonResponse;
 
-class ProductController {
+class ProductController 
+{
 
     public function __construct(private ProductRepository $repository) 
     {}

@@ -5,7 +5,7 @@ namespace Bootstrap;
 use Controller\ProductController;
 use Repository\ProductRepository;
 
-class NewProductController
+class NewProductController implements NewControllerInterface
 {
     public function create(): ProductController
     {
