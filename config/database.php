@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 
-define("LOCALHOST", "localhost");
+define("HOST", "localhost");
 define("USERNAME", "root");
 define("PASSWORD", "");
-define("DB", "shortenUrl");
+define("DB", "scandiweb");
+define("DB_TEST", "scandiweb_test");
