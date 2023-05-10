@@ -5,6 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 function callHook() {
     $url = $_SERVER['REQUEST_URI'] ?? '';
+    $requestMethod = $_SERVER['REQUEST_METHOD'];
 
     //Matching url param from route list
     $routes = registerRouters();
@@ -14,7 +15,7 @@ function callHook() {
         $routeUrl = $route['url'];
         $pattern = preg_quote($routeUrl, '/') . '\??[a-zA-Z_=0-9&@$%#]*'; // /product/get?sku=productSku1
 
-        if (preg_match("/^$pattern$/", $url)) {
+        if (preg_match("/^$pattern$/", $url) && $requestMethod === strtoupper($route['method'])) {
             $controllerMatch = $route['controller'];
             $actionMatch = $route['action'];
             break;
