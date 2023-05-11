@@ -8,6 +8,12 @@ class Product
 	const PRODUCT_TYPE_DVD = 'dvd';
 	const PRODUCT_TYPE_FURNITURE = 'furniture';
 
+	const PRODUCT_TYPE_VALUES = [
+		Product::PRODUCT_TYPE_BOOK,
+		Product::PRODUCT_TYPE_DVD,
+		Product::PRODUCT_TYPE_FURNITURE
+	];
+
     protected string | null $sku = null;
 
     protected string | null $name = null;
@@ -20,7 +26,7 @@ class Product
 
     protected int | null $weight = null;
 
-    protected int | null $heigth = null;
+    protected int | null $height = null;
 
     protected int | null $length = null;
 
@@ -92,14 +98,14 @@ class Product
 		return $this;
 	}
 
-	public function getHeigth(): int | null 
+	public function getHeight(): int | null 
     {
-		return $this->heigth;
+		return $this->height;
 	}
 
-	public function setHeigth(int $heigth): Product 
+	public function setHeight(int $height): Product 
     {
-		$this->heigth = $heigth;
+		$this->height = $height;
 		return $this;
 	}
 	
