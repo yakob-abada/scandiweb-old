@@ -1,4 +1,12 @@
 {
+    "name": "scandiweb/product",
+    "description": "Project to store product in DB.",
+    "authors": [
+        {
+            "name": "Yakob Abada",
+            "email": "yakob.abada@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-0": {
             "Bootstrap": "src",
