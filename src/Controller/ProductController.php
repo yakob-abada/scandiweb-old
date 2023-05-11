@@ -38,6 +38,6 @@ class ProductController
         }
 
         $this->repository->persist(new Product());
-        echo JsonResponse::generate(['message' => 'created successfully']);
+        echo JsonResponse::generate(['message' => 'created successfully'], 201);
     }
 }
