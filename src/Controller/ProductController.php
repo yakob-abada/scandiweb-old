@@ -37,6 +37,7 @@ class ProductController
             die;
         }
 
-        echo 405;
+        $this->repository->persist(new Product());
+        echo JsonResponse::generate(['message' => 'created successfully']);
     }
 }
