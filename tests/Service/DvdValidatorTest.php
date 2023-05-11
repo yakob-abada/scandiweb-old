@@ -4,31 +4,11 @@ namespace Tests\Service;
 
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
-use Service\ProductValidator;
+use Service\DvdValidator;
 
-class ProductValidatorTest extends TestCase
+class DvdValidatorTest extends TestCase
 {
-    public function testPropertiesAreBlank()
-    {
-        $this->assertTrue(true);
-        $product = new Product();
-
-        $excpectedErrors = [
-            'Sku shouldn\'t be blank',
-            'Name shouldn\'t be blank',
-            'Price shouldn\'t be blank',
-            'ProductType shouldn\'t be blank',
-        ];
-
-        $sut = new ProductValidator();
-        $isValid = $sut->validate($product);
-        $errors = $sut->getErrorMessages();
-
-        $this->assertFalse($isValid);
-        $this->assertEquals($excpectedErrors, $errors);
-    }
-
-    public function testWrongProductType()
+    public function testRightDvd()
     {
         $this->assertTrue(true);
         $product = new Product();
@@ -36,13 +16,32 @@ class ProductValidatorTest extends TestCase
             ->setSku('Sku100')
             ->setName('name')
             ->setPrice(100)
-            ->setProductType('test');
+            ->setProductType(Product::PRODUCT_TYPE_DVD)
+            ->setSize(700);
+
+        $sut = new DvdValidator();
+        $isValid = $sut->validate($product);
+        $errors = $sut->getErrorMessages();
+
+        $this->assertTrue($isValid);
+        $this->assertEquals(0, count($errors));
+    }
+
+    public function testMissingProperties()
+    {
+        $this->assertTrue(true);
+        $product = new Product();
+        $product
+            ->setSku('Sku100')
+            ->setName('name')
+            ->setPrice(100)
+            ->setProductType(Product::PRODUCT_TYPE_DVD);
 
         $excpectedErrors = [
-            'ProductType got wrong value',
+            'Size shouldn\'t be blank',
         ];
 
-        $sut = new ProductValidator();
+        $sut = new DvdValidator();
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 

@@ -5,14 +5,14 @@ namespace Controller;
 use Entity\Product;
 use Repository\ProductRepository;
 use Service\JsonResponse;
-use Service\ProductValidator;
+use Service\ProductValidatorFactory;
 
 class ProductController 
 {
 
     public function __construct(
         private ProductRepository $repository,
-        private ProductValidator $productValidator,
+        private ProductValidatorFactory $productValidatorFactory,
     ) {}
 
     public function getAction() 
@@ -30,7 +30,7 @@ class ProductController
 
     public function saveAction()
     {
-        $isValid = $this->productValidator->validate(new Product());
+        $isValid = $this->productValidatorFactory->create(new Product())->validate(new Product());
 
         if (!$isValid) {
             echo 401;
