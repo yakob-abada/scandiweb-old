@@ -12,7 +12,7 @@ class ProductMapper
             ->setSku($data['sku'] ?? null)
             ->setName($data['name'] ?? null)
             ->setPrice($data['price'] ?? null)
-            ->setProductType($data['productType' ?? null])
+            ->setProductType($data['productType'] ?? null)
             ->setSize($data['size'] ?? null)
             ->setWeight($data['weight'] ?? null)
             ->setLength($data['length'] ?? null)

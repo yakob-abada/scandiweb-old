@@ -23,8 +23,7 @@ class ProductController
         $result = $this->repository->findbySku($sku);
 
         if (null === $result) {
-            echo '404';
-            die;
+            return JsonResponse::generate(['messages' => 'product not found'], 404);
         }
 
         return JsonResponse::generate($result);
@@ -33,14 +32,14 @@ class ProductController
     public function saveAction()
     {
         $product = $this->productMapper->convertToObject($_REQUEST);
-        $isValid = $this->productValidatorFactory->create(new Product())->validate($product);
+        $validator = $this->productValidatorFactory->create($product);
+        $isValid = $validator->validate($product);
 
         if (!$isValid) {
-            echo 401;
-            die;
+            return JsonResponse::generate(['messages' => $validator->getErrorMessages()], 401);
         }
 
         $this->repository->persist($product);
-        echo JsonResponse::generate(['message' => 'created successfully'], 201);
+        return JsonResponse::generate(['message' => 'created successfully'], 201);
     }
 }
