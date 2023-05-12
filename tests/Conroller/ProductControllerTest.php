@@ -6,6 +6,7 @@ use Controller\ProductController;
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
 use Repository\ProductRepository;
+use Service\ProductMapper;
 use Service\ProductValidator;
 use Service\ProductValidatorFactory;
 
@@ -26,7 +27,9 @@ class ProductControllerTest extends TestCase
 
         $mockFactory = $this->createMock(ProductValidatorFactory::class);
 
-        $sut = new ProductController($mockRepository, $mockFactory);
+        $mockMapper = $this->createMock(ProductMapper::class);
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper);
 
         $this->expectOutputString(json_encode($result));
         $sut->getAction();
@@ -52,7 +55,13 @@ class ProductControllerTest extends TestCase
             ->method('create')
             ->willReturn($mockValidator);
 
-        $sut = new ProductController($mockRepository, $mockFactory);
+        $mockMapper = $this->createMock(ProductMapper::class);
+        $mockMapper
+            ->expects($this->once())
+            ->method('convertToObject')
+            ->willReturn($product);
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper);
 
         $this->expectOutputString(json_encode(['message' => 'created successfully']));
         $sut->saveAction();

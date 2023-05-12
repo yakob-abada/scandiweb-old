@@ -5,6 +5,7 @@ namespace Controller;
 use Entity\Product;
 use Repository\ProductRepository;
 use Service\JsonResponse;
+use Service\ProductMapper;
 use Service\ProductValidatorFactory;
 
 class ProductController 
@@ -13,6 +14,7 @@ class ProductController
     public function __construct(
         private ProductRepository $repository,
         private ProductValidatorFactory $productValidatorFactory,
+        private ProductMapper $productMapper
     ) {}
 
     public function getAction() 
@@ -30,14 +32,15 @@ class ProductController
 
     public function saveAction()
     {
-        $isValid = $this->productValidatorFactory->create(new Product())->validate(new Product());
+        $product = $this->productMapper->convertToObject($_REQUEST);
+        $isValid = $this->productValidatorFactory->create(new Product())->validate($product);
 
         if (!$isValid) {
             echo 401;
             die;
         }
 
-        $this->repository->persist(new Product());
+        $this->repository->persist($product);
         echo JsonResponse::generate(['message' => 'created successfully'], 201);
     }
 }

@@ -32,7 +32,7 @@ class Product
 
     protected int | null $width = null;
 
-    public function setSku(string $sku): Product
+    public function setSku(string|null $sku): Product
     {
         $this->sku = $sku;
         return $this;
@@ -43,7 +43,7 @@ class Product
         return $this->sku;
     }
 
-    public function setName(string $name): Product
+    public function setName(string|null $name): Product
     {
         $this->name = $name;
         return $this;
@@ -59,7 +59,7 @@ class Product
 		return $this->price;
 	}
 
-	public function setPrice(int $price): self 
+	public function setPrice(int|null $price): self 
 	{
 		$this->price = $price;
 		return $this;
@@ -70,7 +70,7 @@ class Product
 		return $this->productType;
 	}
 
-	public function setProductType(string $productType): Product 
+	public function setProductType(string|null $productType): Product 
     {
 		$this->productType = $productType;
 		return $this;
@@ -81,7 +81,7 @@ class Product
 		return $this->size;
 	}
 
-	public function setSize(int $size): Product 
+	public function setSize(int|null $size): Product 
     {
 		$this->size = $size;
 		return $this;
@@ -92,7 +92,7 @@ class Product
 		return $this->weight;
 	}
 
-	public function setWeight(int $weight): Product 
+	public function setWeight(int|null $weight): Product 
     {
 		$this->weight = $weight;
 		return $this;
@@ -103,7 +103,7 @@ class Product
 		return $this->height;
 	}
 
-	public function setHeight(int $height): Product 
+	public function setHeight(int|null $height): Product 
     {
 		$this->height = $height;
 		return $this;
@@ -114,7 +114,7 @@ class Product
 		return $this->length;
 	}
 
-	public function setLength(int $length): Product 
+	public function setLength(int|null $length): Product 
     {
 		$this->length = $length;
 		return $this;
@@ -125,7 +125,7 @@ class Product
 		return $this->width;
 	}
 
-	public function setWidth(int $width): Product 
+	public function setWidth(int|null $width): Product 
     {
 		$this->width = $width;
 		return $this;
