@@ -8,25 +8,20 @@ class ProductRepository extends AbstractRepository
 {
     private string $_tableName = 'product';
 
-    /**
-     * Save shorten url
-     *
-     * @return array
-     */    
     public function persist(Product $product): void 
     {
         $query = sprintf(
             "insert into %s (sku, name, price, product_type, size, weight, height, length, width) values ('%s', '%s', %s, '%s', %s, %s, %s, %s, %s) ",
             $this->_tableName,
-            $this->escapeString($product->getSku()),
-            $this->escapeString($product->getName()),
-            $this->escapeString($product->getPrice()),
-            $this->escapeString($product->getProductType()),
-            $this->escapeString($product->getSize()),
-            $this->escapeString($product->getWeight()),
-            $this->escapeString($product->getHeight()),
-            $this->escapeString($product->getLength()),
-            $this->escapeString($product->getWeight()),
+            $this->prepareValue($product->getSku()),
+            $this->prepareValue($product->getName()),
+            $this->prepareValue($product->getPrice()),
+            $this->prepareValue($product->getProductType()),
+            $this->prepareValue($product->getSize()),
+            $this->prepareValue($product->getWeight()),
+            $this->prepareValue($product->getHeight()),
+            $this->prepareValue($product->getLength()),
+            $this->prepareValue($product->getWeight()),
         );
 
         //@todo: Needed to properly handled.
@@ -42,7 +37,7 @@ class ProductRepository extends AbstractRepository
         $query = sprintf(
             "SELECT * FROM %s WHERE sku = '%s'",
             $this->_tableName,
-            $this->escapeString($sku),
+            $this->prepareValue($sku),
         );
 
         $this->mysqli->real_query($query);
@@ -58,7 +53,7 @@ class ProductRepository extends AbstractRepository
         return $row;
     }
 
-    private function escapeString($value)
+    private function prepareValue($value)
     {
         if (is_string($value)) {
             return $this->mysqli->real_escape_string($value);
