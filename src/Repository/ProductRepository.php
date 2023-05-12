@@ -16,17 +16,17 @@ class ProductRepository extends AbstractRepository
     public function persist(Product $product): void 
     {
         $query = sprintf(
-            "insert into %s (sky, name, price, product_type, size, weight, height, length, width) values ('%s', '%s', %s, '%s', %s, %s, %s, %s, %s) ",
+            "insert into %s (sku, name, price, product_type, size, weight, height, length, width) values ('%s', '%s', %s, '%s', %s, %s, %s, %s, %s) ",
             $this->_tableName,
-            $this->mysqli->real_escape_string($product->getSku()),
-            $this->mysqli->real_escape_string($product->getName()),
-            $this->mysqli->real_escape_string($product->getPrice()),
-            $this->mysqli->real_escape_string($product->getProductType()),
-            $this->mysqli->real_escape_string($product->getSize()),
-            $this->mysqli->real_escape_string($product->getWeight()),
-            $this->mysqli->real_escape_string($product->getHeigth()),
-            $this->mysqli->real_escape_string($product->getLength()),
-            $this->mysqli->real_escape_string($product->getWeight()),
+            $this->escapeString($product->getSku()),
+            $this->escapeString($product->getName()),
+            $this->escapeString($product->getPrice()),
+            $this->escapeString($product->getProductType()),
+            $this->escapeString($product->getSize()),
+            $this->escapeString($product->getWeight()),
+            $this->escapeString($product->getHeight()),
+            $this->escapeString($product->getLength()),
+            $this->escapeString($product->getWeight()),
         );
 
         //@todo: Needed to properly handled.
@@ -42,7 +42,7 @@ class ProductRepository extends AbstractRepository
         $query = sprintf(
             "SELECT * FROM %s WHERE sku = '%s'",
             $this->_tableName,
-            $this->mysqli->real_escape_string($sku),
+            $this->escapeString($sku),
         );
 
         $this->mysqli->real_query($query);
@@ -56,5 +56,18 @@ class ProductRepository extends AbstractRepository
           $this->mysqli->close();
 
         return $row;
+    }
+
+    private function escapeString($value)
+    {
+        if (is_string($value)) {
+            return $this->mysqli->real_escape_string($value);
+        }
+
+        if (null === $value) {
+            return 'NULL';
+        }
+
+        return $value;
     }
 }

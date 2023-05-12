@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-use Entity\Product;
 use Repository\ProductRepository;
 use Service\JsonRequest;
 use Service\JsonResponse;
@@ -33,7 +32,6 @@ class ProductController
 
     public function saveAction()
     {
-        
         $json = $this->jsonRequest->get();
         $data = json_decode($json, true);
 
