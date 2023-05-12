@@ -4,6 +4,7 @@ namespace Bootstrap;
 
 use Controller\ProductController;
 use Repository\ProductRepository;
+use Service\JsonRequest;
 use Service\ProductMapper;
 use Service\ProductValidatorFactory;
 
@@ -18,6 +19,6 @@ class NewProductController implements NewControllerInterface
             exit();
         }
 
-        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(), new ProductMapper());
+        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(), new ProductMapper(), new JsonRequest());
     }
 }

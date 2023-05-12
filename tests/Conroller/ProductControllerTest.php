@@ -6,6 +6,7 @@ use Controller\ProductController;
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
 use Repository\ProductRepository;
+use Service\JsonRequest;
 use Service\ProductMapper;
 use Service\ProductValidator;
 use Service\ProductValidatorFactory;
@@ -29,7 +30,9 @@ class ProductControllerTest extends TestCase
 
         $mockMapper = $this->createMock(ProductMapper::class);
 
-        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper);
+        $mockJsonReqeust = $this->createMock(JsonRequest::class);
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper, $mockJsonReqeust);
 
         $this->expectOutputString(json_encode($result));
         $sut->getAction();
@@ -48,7 +51,9 @@ class ProductControllerTest extends TestCase
 
         $mockMapper = $this->createMock(ProductMapper::class);
 
-        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper);
+        $mockJsonReqeust = $this->createMock(JsonRequest::class);
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper, $mockJsonReqeust);
 
         $this->expectOutputString(json_encode(['messages' => 'product not found']));
         $sut->getAction();
@@ -80,7 +85,13 @@ class ProductControllerTest extends TestCase
             ->method('convertToObject')
             ->willReturn($product);
 
-        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper);
+            $mockJsonReqeust = $this->createMock(JsonRequest::class);
+            $mockJsonReqeust
+                ->expects($this->once())
+                ->method('get')
+                ->willReturn('{ "sku":"ProductSku100", "name":"ProductName", "price":100, "productType":"dvd", "size":700, "weight":null, "heigth":null, "length":null, "width":null }');
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper, $mockJsonReqeust);
 
         $this->expectOutputString(json_encode(['message' => 'created successfully']));
         $sut->saveAction();
@@ -115,7 +126,14 @@ class ProductControllerTest extends TestCase
             ->method('convertToObject')
             ->willReturn($product);
 
-        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper);
+        $mockJsonReqeust = $this->createMock(JsonRequest::class);
+        $mockJsonReqeust
+        ->expects($this->once())
+        ->method('get')
+        ->willReturn('{ "sku":"ProductSku100"}');
+
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper, $mockJsonReqeust);
 
         $this->expectOutputString(json_encode(['messages' => ['Something went wrong']]));
         $sut->saveAction();

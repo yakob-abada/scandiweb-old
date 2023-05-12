@@ -16,7 +16,7 @@ class ProductMapper
             ->setSize($data['size'] ?? null)
             ->setWeight($data['weight'] ?? null)
             ->setLength($data['length'] ?? null)
-            ->setHeight($data['height'] ?? null)
+            ->setHeight($data['heigth'] ?? null)
             ->setWidth($data['width'] ?? null);
 
         return $product;

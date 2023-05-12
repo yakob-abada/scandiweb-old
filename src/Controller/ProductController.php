@@ -4,6 +4,7 @@ namespace Controller;
 
 use Entity\Product;
 use Repository\ProductRepository;
+use Service\JsonRequest;
 use Service\JsonResponse;
 use Service\ProductMapper;
 use Service\ProductValidatorFactory;
@@ -14,7 +15,8 @@ class ProductController
     public function __construct(
         private ProductRepository $repository,
         private ProductValidatorFactory $productValidatorFactory,
-        private ProductMapper $productMapper
+        private ProductMapper $productMapper,
+        private JsonRequest $jsonRequest,
     ) {}
 
     public function getAction() 
@@ -31,7 +33,11 @@ class ProductController
 
     public function saveAction()
     {
-        $product = $this->productMapper->convertToObject($_REQUEST);
+        
+        $json = $this->jsonRequest->get();
+        $data = json_decode($json, true);
+
+        $product = $this->productMapper->convertToObject($data);
         $validator = $this->productValidatorFactory->create($product);
         $isValid = $validator->validate($product);
 
