@@ -53,6 +53,22 @@ class ProductRepository extends AbstractRepository
         return $row;
     }
 
+    public function findAll(): array
+    {
+        $query = sprintf(
+            "SELECT * FROM %s",
+            $this->_tableName
+        );
+
+        $result = $this->mysqli->query($query);
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free_result();
+          
+        $this->mysqli->close();
+
+        return $rows;
+    }
+
     private function prepareValue($value)
     {
         if (is_string($value)) {

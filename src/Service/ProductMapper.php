@@ -32,7 +32,7 @@ class ProductMapper
             'size' => $product->getSize(),
             'weight' => $product->getWeight(),
             'length' => $product->getLength(),
-            'height' => $product->getHeight(),
+            'heigth' => $product->getHeight(),
             'width' => $product->getWidth()
         ];
 

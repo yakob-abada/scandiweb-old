@@ -30,6 +30,13 @@ class ProductController
         return JsonResponse::generate($result);
     }
 
+    public function getAllAction()
+    {
+        $result = $this->repository->findAll();
+
+        return JsonResponse::generate($result);
+    }
+
     public function saveAction()
     {
         $json = $this->jsonRequest->get();

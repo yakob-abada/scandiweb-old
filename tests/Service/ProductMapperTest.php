@@ -41,8 +41,8 @@ class ProductMapperTest extends TestCase
             'size' => 100,
             'weight' => null,
             'length' => null,
-            'height' => null,
-            'width' => null
+            'width' => null,
+            'heigth' => null,
         ];
 
         $product = new Product();

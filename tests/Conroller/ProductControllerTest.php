@@ -38,6 +38,35 @@ class ProductControllerTest extends TestCase
         $sut->getAction();
     }
 
+    public function testGetAllAction()
+    {
+        $result = [
+            [
+                'sku' => 'SKU100',
+                'name' => 'Test',
+            ],
+            [
+                'sku' => 'SKU101',
+                'name' => 'Test1',
+            ]
+        ];
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findAll')->willReturn($result);
+
+        $mockFactory = $this->createMock(ProductValidatorFactory::class);
+
+        $mockMapper = $this->createMock(ProductMapper::class);
+
+        $mockJsonReqeust = $this->createMock(JsonRequest::class);
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper, $mockJsonReqeust);
+
+        $this->expectOutputString(json_encode($result));
+        $sut->getAllAction();
+    }
+
     public function testFailedGetAction()
     {
         $_REQUEST['sku'] = 'Sku100';

@@ -8,6 +8,12 @@ return [
         'method' => 'get',
     ],
     [
+        'url' => '/product/all',
+        'controller' => 'Product',
+        'action' => 'getAll',
+        'method' => 'get',
+    ],
+    [
         'url' => '/product/saveApi',
         'controller' => 'Product',
         'action' => 'save',
