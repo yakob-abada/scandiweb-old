@@ -2,7 +2,8 @@
 
 namespace Service;
 
-class JsonResponse {
+class JsonResponse 
+{
     public static function generate(array $data, int $status = 200): void
     {
         http_response_code($status);
