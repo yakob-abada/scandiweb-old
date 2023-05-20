@@ -3,8 +3,14 @@
 namespace Service;
 
 use Entity\Product;
+use Repository\ProductRepository;
 
-class ProductValidator {
+class ProductValidator 
+{
+    public function __construct(
+        private ProductRepository $repository 
+    ) {}
+
     private array $notBlank = [
         'sku',
         'name',
@@ -16,6 +22,7 @@ class ProductValidator {
 
     public function validate(Product $product): bool
     {
+        $this->checkSkuNotDuplicated($product);
         $this->checkNotBlank($product);
         $this->checkProductTypeValue($product);
 
@@ -26,6 +33,16 @@ class ProductValidator {
     {
         return $this->errorMessages;
     }
+	
+	private function checkSkuNotDuplicated(Product $product): void
+	{
+		$value = $product->getSku();
+        $result = $this->repository->findbySku($value);
+
+        if (count($result) > 0) {
+            $this->errorMessages[] = 'Sku value is already exist';
+        }
+	}
 
     private function checkNotBlank(Product $product): void
     {

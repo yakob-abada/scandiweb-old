@@ -19,6 +19,6 @@ class NewProductController implements NewControllerInterface
             exit();
         }
 
-        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(), new ProductMapper(), new JsonRequest());
+        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(new ProductRepository($mysqli)), new ProductMapper(), new JsonRequest());
     }
 }
