@@ -47,10 +47,18 @@ class ProductController
         $isValid = $validator->validate($product);
 
         if (!$isValid) {
-            return JsonResponse::generate(['messages' => $validator->getErrorMessages()], 401);
+            return JsonResponse::generate(['messages' => $validator->getErrorMessages()], 400);
         }
 
         $this->repository->persist($product);
         return JsonResponse::generate(['message' => 'created successfully'], 201);
     }
+	
+	public function deleteAction()
+	{
+        $sku = $_REQUEST['sku'] ?? '';
+        $result = $this->repository->deleteBySku($sku);
+		
+		return JsonResponse::generate(['message' => 'deleted successfully'], 200);
+	}
 }

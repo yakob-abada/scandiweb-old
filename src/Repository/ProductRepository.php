@@ -21,17 +21,33 @@ class ProductRepository extends AbstractRepository
             $this->prepareValue($product->getWeight()),
             $this->prepareValue($product->getHeight()),
             $this->prepareValue($product->getLength()),
-            $this->prepareValue($product->getWeight()),
+            $this->prepareValue($product->getWidth()),
         );
 
         //@todo: Needed to properly handled.
         if (!$this->mysqli->query($query)) {
             printf("%d Row inserted.\n", $this->mysqli->affected_rows);
-          }
+        }
           
-          $this->mysqli->close();
+        $this->mysqli->close();
     }
 
+    public function deleteBySku(string $sku): ?array
+    {
+        $query = sprintf(
+            "DELETE FROM %s WHERE sku = '%s'",
+            $this->_tableName,
+            $this->prepareValue($sku),
+        );
+
+        //@todo: Needed to properly handled.
+        if (!$this->mysqli->query($query)) {
+            printf("%d Row inserted.\n", $this->mysqli->affected_rows);
+        }
+          
+        $this->mysqli->close();
+    }
+	
     public function findbySku(string $sku): ?array
     {
         $query = sprintf(

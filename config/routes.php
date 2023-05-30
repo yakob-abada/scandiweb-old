@@ -18,6 +18,12 @@ return [
         'controller' => 'Product',
         'action' => 'save',
         'method' => 'post'
+    ],
+    [
+        'url' => '/product/delete',
+        'controller' => 'Product',
+        'action' => 'delete',
+        'method' => 'delete'
     ]
 ];
 

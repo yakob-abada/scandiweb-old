@@ -128,7 +128,6 @@ class ProductControllerTest extends TestCase
 
     public function testFailedValidationSaveAction()
     {
-        $this->assertTrue(true);
         $product = new Product();
         
         $mockRepository = $this->createMock(ProductRepository::class);
@@ -166,5 +165,26 @@ class ProductControllerTest extends TestCase
 
         $this->expectOutputString(json_encode(['messages' => ['Something went wrong']]));
         $sut->saveAction();
+    }
+
+    public function testDeleteAction()
+    {
+        $_REQUEST['sku'] = 'Sku100';
+
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('deleteBySku')->with('Sku100');
+
+        $mockFactory = $this->createMock(ProductValidatorFactory::class);
+
+        $mockMapper = $this->createMock(ProductMapper::class);
+
+        $mockJsonReqeust = $this->createMock(JsonRequest::class);
+
+        $sut = new ProductController($mockRepository, $mockFactory, $mockMapper, $mockJsonReqeust);
+
+        $this->expectOutputString(json_encode(['message' => 'deleted successfully']));
+        $sut->deleteAction();
     }
 }
