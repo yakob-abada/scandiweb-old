@@ -4,6 +4,7 @@ namespace Tests\Service;
 
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
+use Repository\ProductRepository;
 use Service\BookValidator;
 use Service\DvdValidator;
 use Service\FurnitureValidator;
@@ -16,7 +17,9 @@ class ProductValidatorFactoryTest extends TestCase
     {
         $product = new Product();
 
-        $sut = new ProductValidatorFactory();
+        $mockRepository = $this->createMock(ProductRepository::class);
+
+        $sut = new ProductValidatorFactory($mockRepository);
         $this->assertInstanceOf(ProductValidator::class, $sut->create($product));
     }
 
@@ -25,7 +28,9 @@ class ProductValidatorFactoryTest extends TestCase
         $product = new Product();
         $product->setProductType(Product::PRODUCT_TYPE_BOOK);
 
-        $sut = new ProductValidatorFactory();
+        $mockRepository = $this->createMock(ProductRepository::class);
+
+        $sut = new ProductValidatorFactory($mockRepository);
         $this->assertInstanceOf(BookValidator::class, $sut->create($product));
     }
 
@@ -34,7 +39,9 @@ class ProductValidatorFactoryTest extends TestCase
         $product = new Product();
         $product->setProductType(Product::PRODUCT_TYPE_DVD);
 
-        $sut = new ProductValidatorFactory();
+        $mockRepository = $this->createMock(ProductRepository::class);
+
+        $sut = new ProductValidatorFactory($mockRepository);
         $this->assertInstanceOf(DvdValidator::class, $sut->create($product));
     }
 
@@ -43,7 +50,9 @@ class ProductValidatorFactoryTest extends TestCase
         $product = new Product();
         $product->setProductType(Product::PRODUCT_TYPE_FURNITURE);
 
-        $sut = new ProductValidatorFactory();
+        $mockRepository = $this->createMock(ProductRepository::class);   
+
+        $sut = new ProductValidatorFactory($mockRepository);
         $this->assertInstanceOf(FurnitureValidator::class, $sut->create($product));
     }
 }

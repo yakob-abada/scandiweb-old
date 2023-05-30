@@ -18,7 +18,14 @@ class NewProductController implements NewControllerInterface
             echo "Failed to connect to MySQL: " . $mysqli->connect_error;
             exit();
         }
+		
+        $mysqli2 = new \mysqli(HOST, USERNAME, PASSWORD, DB);
 
-        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(new ProductRepository($mysqli)), new ProductMapper(), new JsonRequest());
+        if ($mysqli2->connect_errno) {
+            echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+            exit();
+        }
+
+        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(new ProductRepository($mysqli2)), new ProductMapper(), new JsonRequest());
     }
 }

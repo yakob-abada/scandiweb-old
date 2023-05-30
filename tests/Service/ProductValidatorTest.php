@@ -4,6 +4,7 @@ namespace Tests\Service;
 
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
+use Repository\ProductRepository;
 use Service\ProductValidator;
 
 class ProductValidatorTest extends TestCase
@@ -20,7 +21,12 @@ class ProductValidatorTest extends TestCase
             'ProductType shouldn\'t be blank',
         ];
 
-        $sut = new ProductValidator();
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findbySku')->with('')->willReturn(null);
+
+        $sut = new ProductValidator($mockRepository);
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 
@@ -42,7 +48,12 @@ class ProductValidatorTest extends TestCase
             'ProductType got wrong value',
         ];
 
-        $sut = new ProductValidator();
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findbySku')->with('Sku100')->willReturn(null);
+
+        $sut = new ProductValidator($mockRepository);
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 

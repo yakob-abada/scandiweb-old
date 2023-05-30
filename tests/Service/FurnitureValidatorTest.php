@@ -4,6 +4,7 @@ namespace Tests\Service;
 
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
+use Repository\ProductRepository;
 use Service\FurnitureValidator;
 
 class FurnitureValidatorTest extends TestCase
@@ -21,7 +22,12 @@ class FurnitureValidatorTest extends TestCase
             ->setLength(700)
             ->setWidth(700);
 
-        $sut = new FurnitureValidator();
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findbySku')->with('Sku100')->willReturn(null);      
+
+        $sut = new FurnitureValidator($mockRepository);
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 
@@ -45,7 +51,12 @@ class FurnitureValidatorTest extends TestCase
             'Width shouldn\'t be blank',
         ];
 
-        $sut = new FurnitureValidator();
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findbySku')->with('Sku100')->willReturn(null);      
+
+        $sut = new FurnitureValidator($mockRepository);
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 

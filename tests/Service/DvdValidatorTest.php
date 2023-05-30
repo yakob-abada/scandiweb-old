@@ -4,6 +4,7 @@ namespace Tests\Service;
 
 use Entity\Product;
 use PHPUnit\Framework\TestCase;
+use Repository\ProductRepository;
 use Service\DvdValidator;
 
 class DvdValidatorTest extends TestCase
@@ -19,7 +20,12 @@ class DvdValidatorTest extends TestCase
             ->setProductType(Product::PRODUCT_TYPE_DVD)
             ->setSize(700);
 
-        $sut = new DvdValidator();
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findbySku')->with('Sku100')->willReturn(null);           
+
+        $sut = new DvdValidator($mockRepository);
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 
@@ -41,7 +47,12 @@ class DvdValidatorTest extends TestCase
             'Size shouldn\'t be blank',
         ];
 
-        $sut = new DvdValidator();
+        $mockRepository = $this->createMock(ProductRepository::class);
+        $mockRepository
+            ->expects($this->once())
+            ->method('findbySku')->with('Sku100')->willReturn(null);           
+
+        $sut = new DvdValidator($mockRepository);
         $isValid = $sut->validate($product);
         $errors = $sut->getErrorMessages();
 

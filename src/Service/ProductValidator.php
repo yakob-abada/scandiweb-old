@@ -36,10 +36,10 @@ class ProductValidator
 	
 	private function checkSkuNotDuplicated(Product $product): void
 	{
-		$value = $product->getSku();
+		$value = $product->getSku() ?? '';
         $result = $this->repository->findbySku($value);
 
-        if (count($result) > 0) {
+        if ($result !== null && count($result) > 0) {
             $this->errorMessages[] = 'Sku value is already exist';
         }
 	}
