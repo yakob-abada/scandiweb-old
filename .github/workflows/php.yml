@@ -41,8 +41,8 @@ jobs:
       run: echo $SUPER_SERVER
 
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ${{ secrets.SITE_SERVER }}
-        username: ${{ secrets.SITE_USER }}
-        password: ${{ secrets.SITE_PASS }}
+        server: files.000webhost.com
+        username: scandiweb-yakob
+        password: Admin123
