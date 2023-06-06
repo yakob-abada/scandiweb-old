@@ -45,4 +45,4 @@ jobs:
       with:
         server: files.000webhost.com
         username: scandiweb-yakob
-        password: Admin123
+        password: "@Admin123"
