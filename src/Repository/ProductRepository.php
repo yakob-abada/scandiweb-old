@@ -32,7 +32,7 @@ class ProductRepository extends AbstractRepository
         $this->mysqli->close();
     }
 
-    public function deleteBySku(string $sku): ?array
+    public function deleteBySku(string $sku): void
     {
         $query = sprintf(
             "DELETE FROM %s WHERE sku = '%s'",
