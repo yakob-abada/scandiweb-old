@@ -35,14 +35,14 @@ jobs:
     - name: Run test suite
       run: ./vendor/bin/phpunit tests
 
-    - name: Run a one-line script
-      env:
-        SUPER_SERVER: ${{ secrets.SITE_SERVER }}
-      run: echo $SUPER_SERVER
+    # - name: Run a one-line script
+    #   env:
+    #     SUPER_SERVER: ${{ secrets.SITE_SERVER }}
+    #   run: echo $SUPER_SERVER
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: files.000webhost.com
-        username: scandiweb-yakob
-        password: "@Admin123"
+    # - name: 📂 Sync files
+    #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    #   with:
+    #     server: files.000webhost.com
+    #     username: scandiweb-yakob
+    #     password: "@Admin123"
