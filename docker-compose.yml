@@ -11,6 +11,9 @@ services:
             - 80:80        
         networks:
             - app-network
+        volumes:
+            - ./php:/var/www/html
+            - ./php/entrypoint.sh:/entrypoint.sh
 
     # MySQL database service
     db:

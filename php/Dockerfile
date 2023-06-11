@@ -14,11 +14,11 @@ RUN wget https://getcomposer.org/download/2.0.9/composer.phar \
  
 RUN a2enmod rewrite && /etc/init.d/apache2 restart
 
-COPY . /var/www/html/
+COPY ./php/entrypoint.sh /var/
 
 EXPOSE 80
 
 CMD ["apache2-foreground"]
 
-RUN chmod 755 ./php/entrypoint.sh
-ENTRYPOINT ["./php/entrypoint.sh"]
+RUN chmod 755 /var/entrypoint.sh
+ENTRYPOINT ["/var/entrypoint.sh"]
