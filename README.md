@@ -10,6 +10,7 @@ Introduction
     - Dependency Injection (DI).
 - It follows Solid principles.
 - Code has been covered by PHPunit.
+- Github actions pipeline has been set up to run tests.
 
 Installation
 ------------
