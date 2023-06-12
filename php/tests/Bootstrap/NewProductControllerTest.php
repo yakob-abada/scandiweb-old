@@ -11,16 +11,14 @@ class NewProductControllerTest extends TestCase
     public function testCreatingNewController() 
     {
         $this->assertTrue(true);
-        // define("HOST", "localhost");
-        // define("USERNAME", "root");
-        // define("PASSWORD", "");
-        // define("DB", "");
+        define("HOST", "db");
+        define("USERNAME", "scandiweb-user");
+        define("PASSWORD", "Admin_123");
+        define("DB", "scandiweb");
 
-        // $this->getMockBuilder(\mysqli::class)->getMock();
+        $sut = new NewProductController();
+        $controller = $sut->create();
 
-        // $sut = new NewProductController();
-        // $controller = $sut->create();
-
-        // $this->assertInstanceOf(ProductController::class, $controller);
+        $this->assertInstanceOf(ProductController::class, $controller);
     }
 }

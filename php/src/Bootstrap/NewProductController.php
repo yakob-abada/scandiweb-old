@@ -5,6 +5,7 @@ namespace Bootstrap;
 use Controller\ProductController;
 use Repository\ProductRepository;
 use Service\JsonRequest;
+use Service\MysqliConnection;
 use Service\ProductMapper;
 use Service\ProductValidatorFactory;
 
@@ -12,20 +13,8 @@ class NewProductController implements NewControllerInterface
 {
     public function create(): ProductController
     {
-        $mysqli = new \mysqli(HOST, USERNAME, PASSWORD, DB);
-
-        if ($mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-            exit();
-        }
-		
-        $mysqli2 = new \mysqli(HOST, USERNAME, PASSWORD, DB);
-
-        if ($mysqli2->connect_errno) {
-            echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-            exit();
-        }
-
-        return new ProductController(new ProductRepository($mysqli), new ProductValidatorFactory(new ProductRepository($mysqli2)), new ProductMapper(), new JsonRequest());
+        return new ProductController(
+            new ProductRepository(MysqliConnection::connect()), 
+            new ProductValidatorFactory(new ProductRepository(MysqliConnection::connect())), new ProductMapper(), new JsonRequest());
     }
 }
