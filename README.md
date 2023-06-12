@@ -20,8 +20,13 @@ Installation
 
 How does it work?
 ------------------ 
-- Working directory: `php`
+- Working directory: `php`.
 - Create Controller class in Controller directory and name should follow this pattern `{ClassName}Controller.php`.
 - Add method actions in the class and the name should follow `{methodName}Action`.
 - Initialize the class in Bootstrap file and should name follow this pattern `New{ClassName}Controller.php` and here where you can identify all DI the would be passed to the controller if it's required.
 - Finally Add new route in `config\routes.php` so the created action could be called from postman.
+
+Security
+------------------ 
+- To make this backend be consumed by Frontend app [Frontend app](https://github.com/yakob-abada/scandiweb-app)
+- index.php line 3 needed to be updated with frontend domain url to strict CORS.
