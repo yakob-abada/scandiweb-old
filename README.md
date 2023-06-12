@@ -20,6 +20,7 @@ Installation
 
 How does it work?
 ------------------ 
+- Working directory: `php`
 - Create Controller class in Controller directory and name should follow this pattern `{ClassName}Controller.php`.
 - Add method actions in the class and the name should follow `{methodName}Action`.
 - Initialize the class in Bootstrap file and should name follow this pattern `New{ClassName}Controller.php` and here where you can identify all DI the would be passed to the controller if it's required.
