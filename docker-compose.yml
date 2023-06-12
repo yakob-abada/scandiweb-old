@@ -14,6 +14,8 @@ services:
         volumes:
             - ./php:/var/www/html
             - ./php/entrypoint.sh:/entrypoint.sh
+        env_file:
+            - ./.env
 
     # MySQL database service
     db:
