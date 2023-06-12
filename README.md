@@ -27,6 +27,12 @@ How does it work?
 - Finally Add new route in `config\routes.php` so the created action could be called from postman.
 
 Security
------------------- 
+---------
 - To make this backend be consumed by Frontend app [Frontend app](https://github.com/yakob-abada/scandiweb-app)
 - index.php line 3 needed to be updated with frontend domain url to strict CORS.
+
+What to improve
+---------------
+- Introduce structured logs for better debugging.
+- Increase code testing coverage.
+- Add to pipeline auto deployment to AWS EC2 fargate.
