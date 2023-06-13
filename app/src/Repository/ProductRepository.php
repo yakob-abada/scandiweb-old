@@ -8,7 +8,7 @@ class ProductRepository extends AbstractRepository
 {
     private $_tableName = 'product';
 
-    public function persist(Product $product): void 
+    public function persist(Product $product) 
     {
         $query = sprintf(
             "insert into %s (sku, name, price, product_type, size, weight, height, length, width) values ('%s', '%s', %s, '%s', %s, %s, %s, %s, %s) ",
@@ -32,7 +32,7 @@ class ProductRepository extends AbstractRepository
         $this->mysqli->close();
     }
 
-    public function deleteBySku(string $sku): void
+    public function deleteBySku(string $sku)
     {
         $query = sprintf(
             "DELETE FROM %s WHERE sku = '%s'",

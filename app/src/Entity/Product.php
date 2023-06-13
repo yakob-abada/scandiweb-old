@@ -14,118 +14,145 @@ class Product
 		Product::PRODUCT_TYPE_FURNITURE
 	];
 
-    protected string | null $sku = null;
+	/**
+	 * @var string | null
+	 */
+    protected  $sku = null;
 
-    protected string | null $name = null;
+	/**
+	 * @var string | null
+	 */
+    protected $name = null;
 
-    protected int | null $price = null;
+	/**
+	 * @var int | null
+	 */
+    protected $price = null;
 
-    protected string | null $productType = null; 
+	/**
+	 * @var string | null
+	 */	
+    protected $productType = null; 
 
-    protected int | null $size = null;
+	/**
+	 * @var int | null
+	 */	
+    protected $size = null;
 
-    protected int | null $weight = null;
+	/**
+	 * @var int | null
+	 */	
+    protected $weight = null;
 
-    protected int | null $height = null;
+	/**
+	 * @var int | null
+	 */		
+	protected $height = null;
 
-    protected int | null $length = null;
+	/**
+	 * @var int | null
+	 */		
+    protected $length = null;
 
-    protected int | null $width = null;
+	/**
+	 * @var int | null
+	 */		
+    protected $width = null;
 
-    public function setSku(string|null $sku): Product
+    public function setSku($sku): Product
     {
         $this->sku = $sku;
         return $this;
     }
 
-    public function getSku(): string | null
+    public function getSku()
     {
         return $this->sku;
     }
 
-    public function setName(string|null $name): Product
+    public function setName($name): Product
     {
         $this->name = $name;
         return $this;
     }
 
-    public function getName(): string | null
+    public function getName()
     {
         return $this->name;
     }
 
-	public function getPrice(): int | null
+	public function getPrice()
 	{
 		return $this->price;
 	}
 
-	public function setPrice(int|null $price): self 
+	public function setPrice($price): self 
 	{
 		$this->price = $price;
 		return $this;
 	}
 
-	public function getProductType(): string | null
+	public function getProductType()
 	{
 		return $this->productType;
 	}
 
-	public function setProductType(string|null $productType): Product 
+	public function setProductType($productType): Product 
     {
 		$this->productType = $productType;
 		return $this;
 	}
 
-	public function getSize(): int | null 
+	public function getSize()
     {
 		return $this->size;
 	}
 
-	public function setSize(int|null $size): Product 
+	public function setSize($size): Product 
     {
 		$this->size = $size;
 		return $this;
 	}
 
-	public function getWeight(): int | null 
+	public function getWeight()
     {
 		return $this->weight;
 	}
 
-	public function setWeight(int|null $weight): Product 
+	public function setWeight($weight): Product 
     {
 		$this->weight = $weight;
 		return $this;
 	}
 
-	public function getHeight(): int | null 
+	public function getHeight()
     {
 		return $this->height;
 	}
 
-	public function setHeight(int|null $height): Product 
+	public function setHeight($height): Product 
     {
 		$this->height = $height;
 		return $this;
 	}
 	
-	public function getLength(): int | null 
+	public function getLength()
 	{
 		return $this->length;
 	}
 
-	public function setLength(int|null $length): Product 
+	public function setLength($length): Product 
     {
 		$this->length = $length;
 		return $this;
 	}
 
-	public function getWidth(): int | null 
+	public function getWidth()
 	{
 		return $this->width;
 	}
 
-	public function setWidth(int|null $width): Product 
+	public function setWidth($width): Product 
     {
 		$this->width = $width;
 		return $this;

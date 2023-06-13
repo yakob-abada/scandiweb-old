@@ -14,7 +14,7 @@ class FurnitureValidator extends ProductValidator
         return count($this->errorMessages) === 0;
     }
 
-    private function checkMissingProperties(Product $product): void
+    private function checkMissingProperties(Product $product)
     {
         if (Product::PRODUCT_TYPE_FURNITURE !== $product->getProductType()) {
             return;

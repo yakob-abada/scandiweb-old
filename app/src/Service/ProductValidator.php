@@ -7,18 +7,23 @@ use Repository\ProductRepository;
 
 class ProductValidator 
 {
-    public function __construct(
-        private ProductRepository $repository 
-    ) {}
+    /**
+     * @var ProductRepository
+     */
+    private $repository;
+    public function __construct(ProductRepository $repository) 
+    {
+        $this->repository = $repository;
+    }
 
-    private array $notBlank = [
+    private $notBlank = [
         'sku',
         'name',
         'price',
         'productType',
     ];
 
-    protected array $errorMessages = [];
+    protected $errorMessages = [];
 
     public function validate(Product $product): bool
     {
@@ -34,7 +39,7 @@ class ProductValidator
         return $this->errorMessages;
     }
 	
-	private function checkSkuNotDuplicated(Product $product): void
+	private function checkSkuNotDuplicated(Product $product)
 	{
 		$value = $product->getSku() ?? '';
         $result = $this->repository->findbySku($value);
@@ -44,7 +49,7 @@ class ProductValidator
         }
 	}
 
-    private function checkNotBlank(Product $product): void
+    private function checkNotBlank(Product $product)
     {
         foreach ($this->notBlank as $property) {
             $methodName = 'get' . ucfirst($property);
@@ -61,7 +66,7 @@ class ProductValidator
         }
     }
 
-    private function checkProductTypeValue(Product $product): void
+    private function checkProductTypeValue(Product $product)
     {
         $value = $product->getProductType();
         if (null !== $value && '' !== $value && !in_array($value, Product::PRODUCT_TYPE_VALUES)) {

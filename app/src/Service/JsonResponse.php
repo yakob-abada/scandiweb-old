@@ -4,7 +4,7 @@ namespace Service;
 
 class JsonResponse 
 {
-    public static function generate(array $data, int $status = 200): void
+    public static function generate(array $data, int $status = 200)
     {
         http_response_code($status);
         header("Content-Type: application/json");
