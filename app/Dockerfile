@@ -35,3 +35,10 @@ RUN wget https://getcomposer.org/download/2.0.9/composer.phar \
 
 # By default start up apache in the foreground, override with /bin/bash for interative.
 CMD /usr/sbin/apache2ctl -D FOREGROUND
+
+COPY ./app/entrypoint.sh /var/
+
+WORKDIR /var/www/html
+
+RUN chmod 755 /var/entrypoint.sh
+ENTRYPOINT ["/var/entrypoint.sh"]
