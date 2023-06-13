@@ -10,13 +10,35 @@ use Service\ProductValidatorFactory;
 
 class ProductController 
 {
+    /**
+     * @var ProductRepository
+     */
+    private $repository;
+    /**
+     * @var ProductValidatorFactory
+     */
+    private $productValidatorFactory;
+    /**
+     * @var ProductMapper
+     */
+    private  $productMapper;
+    /**
+     * @var JsonRequest
+     */
+    private $jsonRequest;
+
 
     public function __construct(
-        private ProductRepository $repository,
-        private ProductValidatorFactory $productValidatorFactory,
-        private ProductMapper $productMapper,
-        private JsonRequest $jsonRequest,
-    ) {}
+        ProductRepository $repository,
+        ProductValidatorFactory $productValidatorFactory,
+        ProductMapper $productMapper,
+        JsonRequest $jsonRequest
+    ) {
+        $this->repository = $repository;
+        $this->productValidatorFactory = $productValidatorFactory;
+        $this->productMapper = $productMapper;
+        $this->jsonRequest = $jsonRequest;
+    }
 
     public function getAction() 
     {

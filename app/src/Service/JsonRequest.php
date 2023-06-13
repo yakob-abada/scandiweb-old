@@ -4,7 +4,7 @@ namespace Service;
 
 class JsonRequest
 {
-    public function get(): string|bool
+    public function get()
     {
         return file_get_contents('php://input');
     }

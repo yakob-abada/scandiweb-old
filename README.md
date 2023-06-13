@@ -9,8 +9,9 @@ Introduction
     - Domain-driven design (DDD).
     - Dependency Injection (DI).
 - It follows Solid principles.
-- Code has been covered by PHPunit.
-- Github actions pipeline has been set up to run tests.
+- Code has been covered by PHPunit (not working cause PHPunit old version).
+- PHP:7.0
+- mysql:5.6
 
 Installation
 ------------
@@ -36,3 +37,4 @@ What to improve
 - Introduce structured logs for better debugging.
 - Increase code testing coverage.
 - Add to pipeline auto deployment to AWS EC2 fargate.
+- This works on PHP7.0 which requires to use old phpunit that's faulty and is not supported anymore.

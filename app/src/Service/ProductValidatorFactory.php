@@ -6,7 +6,11 @@ use Entity\Product;
 use Repository\ProductRepository;
 
 class ProductValidatorFactory {
-    public function __construct(private ProductRepository $repository) {}
+    private $repository;
+    public function __construct(ProductRepository $repository) 
+    {
+        $this->repository = $repository;
+    }
     public function create(Product $product): ProductValidator 
     {
         switch($product->getProductType()) {

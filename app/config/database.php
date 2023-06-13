@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 
-define("HOST", $_ENV['DATABASE_HOST']);
-define("USERNAME", $_ENV['DATABASE_USERNAME']);
-define("PASSWORD", $_ENV['DATABASE_PASSWORD']);
-define("DB", $_ENV['DATABASE_NAME']);
+define("HOST", getenv('DATABASE_HOST'));
+define("USERNAME", getenv('DATABASE_USERNAME'));
+define("PASSWORD", getenv('DATABASE_PASSWORD'));
+define("DB", getenv('DATABASE_NAME'));
 define("DB_TEST", "scandiweb_test");

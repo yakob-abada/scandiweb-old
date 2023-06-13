@@ -6,7 +6,7 @@ use Entity\Product;
 
 class ProductRepository extends AbstractRepository
 {
-    private string $_tableName = 'product';
+    private $_tableName = 'product';
 
     public function persist(Product $product): void 
     {
@@ -21,7 +21,7 @@ class ProductRepository extends AbstractRepository
             $this->prepareValue($product->getWeight()),
             $this->prepareValue($product->getHeight()),
             $this->prepareValue($product->getLength()),
-            $this->prepareValue($product->getWidth()),
+            $this->prepareValue($product->getWidth())
         );
 
         //@todo: Needed to properly handled.
@@ -37,7 +37,7 @@ class ProductRepository extends AbstractRepository
         $query = sprintf(
             "DELETE FROM %s WHERE sku = '%s'",
             $this->_tableName,
-            $this->prepareValue($sku),
+            $this->prepareValue($sku)
         );
 
         //@todo: Needed to properly handled.
@@ -48,12 +48,12 @@ class ProductRepository extends AbstractRepository
         $this->mysqli->close();
     }
 	
-    public function findbySku(string $sku): ?array
+    public function findbySku(string $sku)
     {
         $query = sprintf(
             "SELECT * FROM %s WHERE sku = '%s'",
             $this->_tableName,
-            $this->prepareValue($sku),
+            $this->prepareValue($sku)
         );
 
         $this->mysqli->real_query($query);
